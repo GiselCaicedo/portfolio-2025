@@ -1,26 +1,647 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM - Portfolio 2025
+   Inspirado en: newgenre.studio & every-day.nl
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────
+   COLOR TOKENS - Light Mode (Default)
+   ───────────────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background */
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-tertiary: #f5f5f5;
+
+  /* Radial Gradients - every-day.nl style */
+  --radial-primary: #EAF7C0;
+  --radial-secondary: #F7FFE8;
+  --radial-accent: #d4e8a0;
+
+  /* Foreground */
+  --fg-primary: #0a0a0a;
+  --fg-secondary: #3d3d3d;
+  --fg-tertiary: #6b6b6b;
+  --fg-muted: #9a9a9a;
+
+  /* Hero Gradient Colors (newgenre.studio) */
+  --hero-1: #0C0C0E;
+  --hero-2: #1A1F2B;
+  --hero-3: #233850;
+  --hero-4: #7DA1C2;
+  --hero-5: #DDE6ED;
+  --hero-6: #F5F1DF;
+
+  /* Accents */
+  --accent-primary: #0a0a0a;
+  --accent-heart: #FF2A2A;
+
+  /* Borders */
+  --border-subtle: rgba(10, 10, 10, 0.08);
+  --border-default: rgba(10, 10, 10, 0.15);
+  --border-strong: rgba(10, 10, 10, 0.3);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+  --shadow-polaroid: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+  /* Spacing */
+  --spacing-section: clamp(80px, 12vw, 160px);
+  --spacing-container: clamp(24px, 5vw, 80px);
+
+  /* Typography Scale - Extreme sizes for editorial feel */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+  --text-3xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  --text-4xl: clamp(2.5rem, 1.75rem + 3.75vw, 4rem);
+  --text-5xl: clamp(3rem, 2rem + 5vw, 5.5rem);
+  --text-6xl: clamp(4rem, 2.5rem + 7.5vw, 8rem);
+  --text-hero: clamp(3.5rem, 2rem + 8vw, 7rem);
+  --text-display: clamp(5rem, 3rem + 10vw, 12rem);
+  --text-mega: clamp(6rem, 4rem + 12vw, 16rem);
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.04em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+  --transition-theme: 800ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-hero: 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* ─────────────────────────────────────────────────────────────────
+   Dark Mode - "Good Vibes Modus" (every-day.nl style)
+   ───────────────────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --bg-primary: #111111;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #222222;
+
+  /* Radials become dark/muted */
+  --radial-primary: #1a2a1a;
+  --radial-secondary: #0f1f0f;
+  --radial-accent: #2a3a2a;
+
+  --fg-primary: #ffffff;
+  --fg-secondary: #e0e0e0;
+  --fg-tertiary: #a0a0a0;
+  --fg-muted: #666666;
+
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.25);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   TAILWIND THEME INTEGRATION
+   ───────────────────────────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--fg-primary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─────────────────────────────────────────────────────────────────
+   BASE STYLES
+   ───────────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--fg-primary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  transition:
+    background-color var(--transition-theme),
+    color var(--transition-theme);
+  overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   TYPOGRAPHY UTILITIES
+   ───────────────────────────────────────────────────────────────── */
+.font-serif {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+.text-hero {
+  font-size: var(--text-hero);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tighter);
+}
+
+.text-mega {
+  font-size: var(--text-mega);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tighter);
+  font-weight: 700;
+}
+
+.text-display {
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-headline {
+  font-size: var(--text-5xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-caption {
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   LAYOUT UTILITIES
+   ───────────────────────────────────────────────────────────────── */
+.container-main {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: var(--spacing-container);
+  padding-right: var(--spacing-container);
+}
+
+.section-spacing {
+  padding-top: var(--spacing-section);
+  padding-bottom: var(--spacing-section);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   KEYFRAME ANIMATIONS
+   ───────────────────────────────────────────────────────────────── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-slow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes radial-drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(20px, -10px) scale(1.02);
+  }
+  50% {
+    transform: translate(-10px, 15px) scale(0.98);
+  }
+  75% {
+    transform: translate(-20px, -5px) scale(1.01);
+  }
+}
+
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Animation Classes */
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation: marquee 50s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s var(--ease-out-expo) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s var(--ease-out-expo) forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 1.2s var(--ease-out-expo) forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-radial-drift {
+  animation: radial-drift 20s ease-in-out infinite;
+}
+
+.animate-heart-beat {
+  animation: heart-beat 0.6s ease-in-out;
+}
+
+/* Staggered delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* ─────────────────────────────────────────────────────────────────
+   COMPONENT STYLES
+   ───────────────────────────────────────────────────────────────── */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.btn-primary {
+  background: var(--fg-primary);
+  color: var(--bg-primary);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--fg-primary);
+  border: 1px solid var(--border-strong);
+}
+
+.btn-secondary:hover {
+  background: var(--fg-primary);
+  color: var(--bg-primary);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--fg-primary);
+  padding: 8px 16px;
+}
+
+.btn-ghost:hover {
+  background: var(--bg-tertiary);
+}
+
+/* CTA with subtle border (newgenre style) */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: #ffffff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.btn-cta:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Links */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--fg-primary);
+  transition: gap var(--transition-base);
+}
+
+.link-arrow:hover {
+  gap: 12px;
+}
+
+.link-arrow::after {
+  content: "\2197";
+  font-size: 1.1em;
+}
+
+/* Cards */
+.card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Polaroid style image cards */
+.polaroid {
+  background: #ffffff;
+  padding: 12px 12px 40px 12px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-polaroid);
+  transition: transform var(--transition-slow);
+}
+
+.polaroid:hover {
+  transform: rotate(2deg) translateY(-8px);
+}
+
+/* Form Elements */
+.input {
+  width: 100%;
+  padding: 16px 0;
+  font-size: var(--text-lg);
+  color: var(--fg-primary);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-default);
+  outline: none;
+  transition: border-color var(--transition-base);
+}
+
+.input::placeholder {
+  color: var(--fg-muted);
+}
+
+.input:focus {
+  border-color: var(--fg-primary);
+}
+
+.label {
+  font-size: var(--text-xs);
+  color: var(--fg-tertiary);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   GOOD VIBES TOGGLE (Fixed Bottom Left)
+   ───────────────────────────────────────────────────────────────── */
+.good-vibes-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-theme);
+  box-shadow: var(--shadow-md);
+}
+
+.good-vibes-toggle:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.good-vibes-toggle .heart {
+  width: 20px;
+  height: 20px;
+  transition: all var(--transition-base);
+}
+
+.good-vibes-toggle .heart-outline {
+  fill: none;
+  stroke: var(--fg-primary);
+  stroke-width: 2;
+}
+
+.good-vibes-toggle .heart-fill {
+  fill: var(--fg-primary);
+  opacity: 0;
+  transition: all var(--transition-base);
+}
+
+[data-theme="dark"] .good-vibes-toggle .heart-outline {
+  stroke: var(--accent-heart);
+}
+
+[data-theme="dark"] .good-vibes-toggle .heart-fill {
+  fill: var(--accent-heart);
+  opacity: 1;
+}
+
+.good-vibes-toggle .label-text {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--fg-primary);
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   RADIAL GRADIENTS (every-day.nl style)
+   ───────────────────────────────────────────────────────────────── */
+.radial-bg {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.7;
+  pointer-events: none;
+  transition:
+    background var(--transition-theme),
+    opacity var(--transition-theme);
+}
+
+.radial-primary {
+  background: var(--radial-primary);
+}
+
+.radial-secondary {
+  background: var(--radial-secondary);
+}
+
+.radial-accent {
+  background: var(--radial-accent);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   NAVBAR TRANSPARENT
+   ───────────────────────────────────────────────────────────────── */
+.navbar-transparent {
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: none;
+}
+
+.navbar-solid {
+  background: var(--bg-primary);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SELECTION & SCROLLBAR
+   ───────────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--fg-primary);
+  color: var(--bg-primary);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fg-muted);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-tertiary);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   FOCUS STYLES
+   ───────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--fg-primary);
+  outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   UTILITY CLASSES
+   ───────────────────────────────────────────────────────────────── */
+.opacity-0 { opacity: 0; }
+.opacity-100 { opacity: 1; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
