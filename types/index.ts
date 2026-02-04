@@ -35,6 +35,21 @@ export interface TechItem {
   icon?: string;
 }
 
+export interface PlatformItem {
+  name: string;
+}
+
+export interface ProcessStep {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface ContactFormData {
   firstName: string;
   lastName: string;

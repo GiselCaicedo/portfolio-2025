@@ -1,32 +1,29 @@
 import {
-  HeroNewGenre,
-  TechMarquee,
+  HeroVisuvate,
+  TechStack,
+  Intro,
   Services,
   Projects,
-  About,
+  Platforms,
+  Process,
+  Faq,
   Contact,
+  Cta,
 } from '@/components/sections';
 
 export default function Home() {
   return (
     <>
-      {/* Hero Section - newgenre.studio style with scroll-based gradient (2 slides) */}
-      <HeroNewGenre />
-
-      {/* Tech Stack Marquee */}
-      <TechMarquee />
-
-      {/* Services Section */}
-      <Services />
-
-      {/* Projects Section */}
+      <HeroVisuvate />
+      <TechStack />
+      <Intro />
       <Projects />
-
-      {/* About Section */}
-      <About />
-
-      {/* Contact Section */}
+      <Services />
+      <Platforms />
+      <Process />
+      <Faq />
       <Contact />
+      <Cta />
     </>
   );
 }

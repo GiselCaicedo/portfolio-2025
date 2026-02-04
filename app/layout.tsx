@@ -1,42 +1,43 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import { Playfair_Display } from 'next/font/google';
+import { Plus_Jakarta_Sans, Fraunces, JetBrains_Mono } from 'next/font/google';
 import { Header, Footer } from '@/components/layout';
 import { GoodVibesToggle } from '@/components/ui';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: '--font-jakarta',
   subsets: ['latin'],
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const fraunces = Fraunces({
+  variable: '--font-fraunces',
   subsets: ['latin'],
+  display: 'swap',
 });
 
-const playfair = Playfair_Display({
-  variable: '--font-playfair',
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains',
   subsets: ['latin'],
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Creative Developer & Designer',
-  description: 'Crafting digital experiences that bridge design and technology. From design to development, complete digital solutions to elevate your product.',
-  keywords: ['developer', 'designer', 'portfolio', 'web development', 'UI/UX', 'creative'],
-  authors: [{ name: 'Portfolio' }],
+  title: 'Gissoler Studio | Digital products with precision',
+  description: 'We design and build web experiences focused on clarity, conversion, and performance.',
+  keywords: ['studio', 'web', 'design', 'development', 'ux', 'branding'],
+  authors: [{ name: 'Gissoler Studio' }],
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    title: 'Portfolio | Creative Developer & Designer',
-    description: 'Crafting digital experiences that bridge design and technology.',
-    siteName: 'Portfolio',
+    title: 'Gissoler Studio | Digital products with precision',
+    description: 'Premium sites that convert and feel alive.',
+    siteName: 'Gissoler Studio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portfolio | Creative Developer & Designer',
-    description: 'Crafting digital experiences that bridge design and technology.',
+    title: 'Gissoler Studio | Digital products with precision',
+    description: 'Premium sites that convert and feel alive.',
   },
   robots: {
     index: true,
@@ -52,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}
+        className={`${plusJakarta.variable} ${fraunces.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <Header />
         <main>{children}</main>

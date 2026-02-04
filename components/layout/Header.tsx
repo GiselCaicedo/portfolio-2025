@@ -7,17 +7,11 @@ import { siteConfig } from '@/data/site';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isInHero, setIsInHero] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const heroHeight = window.innerHeight * 3;
-      const progress = Math.min(scrollY / (heroHeight - window.innerHeight), 1);
-
-      setScrollProgress(progress);
-      setIsInHero(scrollY < heroHeight - 50);
+      setIsScrolled(window.scrollY > 12);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -25,78 +19,49 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Colors based on scroll position
-  const isLight = !isInHero || scrollProgress > 0.7;
-  const textColor = isLight ? '#0a0a0a' : '#ffffff';
-  const bgColor = isLight ? 'rgba(255, 255, 255, 0.95)' : 'transparent';
-  const borderColor = isLight ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)';
-
-  const clients = siteConfig.clients || [];
-  // Triplicamos para un loop más suave
-  const duplicatedClients = [...clients, ...clients, ...clients];
-
-  // Split navigation for centered logo layout
-  const leftNav = siteConfig.navigation.slice(0, 2);
-  const rightNav = siteConfig.navigation.slice(2);
+  const textColor = '#ffffff';
+  const bgColor = isScrolled ? 'rgba(0, 0, 0, 0.6)' : 'transparent';
+  const borderColor = 'transparent';
 
   return (
     <header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-      style={{ background: bgColor, backdropFilter: isLight ? 'blur(20px)' : 'none' }}
+      style={{
+        background: bgColor,
+        backdropFilter: isScrolled ? 'blur(18px)' : 'none',
+        borderBottom: `1px solid ${borderColor}`,
+      }}
     >
-      {/* Ticker Bar */}
       <div
-        className="relative overflow-hidden"
-        style={{ background: '#000' }}
-      >
-        <div className="flex animate-marquee-slow whitespace-nowrap py-3">
-          {/* First set */}
-          <div className="flex items-center shrink-0">
-            <span className="inline-flex items-center text-[11px] text-white/50 tracking-wide shrink-0">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 mr-3" />
-              Now creating
-            </span>
-            {clients.map((item, index) => (
-              <span
-                key={`a-${index}`}
-                className="inline-flex items-center text-[11px] tracking-wide shrink-0 ml-10"
-              >
-                <span className="text-white/50">{item.desc}</span>
-                <span className="text-white/50 mx-2">–</span>
-                <span className="text-white">{item.client}</span>
-              </span>
-            ))}
-          </div>
-          {/* Duplicate for seamless loop */}
-          <div className="flex items-center shrink-0 ml-10">
-            <span className="inline-flex items-center text-[11px] text-white/50 tracking-wide shrink-0">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 mr-3" />
-              Now creating
-            </span>
-            {clients.map((item, index) => (
-              <span
-                key={`b-${index}`}
-                className="inline-flex items-center text-[11px] tracking-wide shrink-0 ml-10"
-              >
-                <span className="text-white/50">{item.desc}</span>
-                <span className="text-white/50 mx-2">–</span>
-                <span className="text-white">{item.client}</span>
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Main Navigation */}
+        className="absolute inset-0 -z-10 pointer-events-none"
+        style={{
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%)',
+        }}
+      />
       <div className="container-main">
         <nav className="flex items-center justify-between h-16">
-          {/* Left Navigation */}
-          <div className="hidden md:flex items-center gap-8 flex-1">
-            {leftNav.map((item) => (
+          {/* Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-3 text-lg font-semibold tracking-tight transition-colors duration-300"
+            style={{ color: textColor }}
+          >
+            <span
+              className="inline-flex items-center justify-center w-8 h-8 rounded-full border"
+              style={{ borderColor: textColor }}
+            >
+              {siteConfig.name.charAt(0).toUpperCase()}
+            </span>
+            <span>{siteConfig.name}</span>
+          </Link>
+
+          {/* Center Navigation */}
+          <div className="hidden md:flex items-center gap-10">
+            {siteConfig.navigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium transition-colors duration-300 hover:opacity-60"
+                className="text-sm font-medium transition-colors duration-300 hover:opacity-70"
                 style={{ color: textColor }}
               >
                 {item.label}
@@ -104,28 +69,25 @@ export function Header() {
             ))}
           </div>
 
-          {/* Centered Logo */}
-          <Link
-            href="/"
-            className="text-xl font-semibold tracking-tight transition-colors duration-300 md:absolute md:left-1/2 md:-translate-x-1/2"
-            style={{ color: textColor }}
-          >
-            {siteConfig.name}
-            <span className="text-xs align-super ml-0.5">®</span>
-          </Link>
-
-          {/* Right Navigation */}
-          <div className="hidden md:flex items-center gap-8 flex-1 justify-end">
-            {rightNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium transition-colors duration-300 hover:opacity-60"
-                style={{ color: textColor }}
-              >
-                {item.label}
-              </Link>
-            ))}
+          {/* Right CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <span
+              className="text-xs uppercase tracking-widest px-3 py-1 rounded-full border"
+              style={{ color: textColor, borderColor: 'rgba(0,0,0,0.25)' }}
+            >
+              Booking open
+            </span>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full transition-colors"
+              style={{
+                background: '#ffffff',
+                color: '#0a0a0a',
+              }}
+            >
+              Let's talk
+              <Icon name="arrow" size={16} />
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -172,7 +134,7 @@ export function Header() {
                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              Get in Touch
+              Let's talk
             </button>
           </div>
         </div>

@@ -43,7 +43,7 @@ export function ThemeToggle() {
         </span>
       </span>
       <span className="hidden sm:inline whitespace-nowrap">
-        {theme === 'dark' ? 'Good vibes on' : 'Enable good vibes'}
+        {theme === 'dark' ? 'Dark mode' : 'Enable dark mode'}
       </span>
     </button>
   );

@@ -1,8 +1,10 @@
-export { Hero } from './Hero';
-export { HeroNewGenre } from './HeroNewGenre';
-export { HeroEveryDay } from './HeroEveryDay';
-export { TechMarquee } from './TechMarquee';
+export { HeroVisuvate } from './HeroVisuvate';
+export { TechStack } from './TechStack';
+export { Intro } from './Intro';
 export { Services } from './Services';
 export { Projects } from './Projects';
+export { Platforms } from './Platforms';
+export { Process } from './Process';
+export { Faq } from './Faq';
 export { Contact } from './Contact';
-export { About } from './About';
+export { Cta } from './Cta';

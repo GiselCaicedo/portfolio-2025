@@ -23,7 +23,7 @@ export function GoodVibesToggle() {
     <button
       onClick={handleClick}
       className="good-vibes-toggle"
-      aria-label={isDark ? 'Disable good vibes modus' : 'Enable good vibes modus'}
+      aria-label={isDark ? 'Disable dark mode' : 'Enable dark mode'}
     >
       {/* Heart Icon */}
       <svg
@@ -56,7 +56,7 @@ export function GoodVibesToggle() {
 
       {/* Label */}
       <span className="label-text hidden sm:inline">
-        {isDark ? 'Good vibes on' : 'Enable good vibes'}
+        {isDark ? 'Dark mode' : 'Enable dark mode'}
       </span>
     </button>
   );

@@ -8,7 +8,8 @@ export function Contact() {
     firstName: '',
     lastName: '',
     email: '',
-    phone: '',
+    company: '',
+    budget: '',
     message: '',
   });
 
@@ -18,44 +19,33 @@ export function Contact() {
   };
 
   return (
-    <section
-      id="contact"
-      className="section-spacing"
-      style={{ background: 'var(--bg-tertiary)' }}
-    >
+    <section id="contact" className="section-spacing" style={{ background: 'var(--bg-primary)' }}>
       <div className="container-main">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-          {/* Left Column - Heading */}
-          <div className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="lg:col-span-5 space-y-6">
             <p className="text-caption" style={{ color: 'var(--fg-tertiary)' }}>
-              Get in Touch
+              Contact
             </p>
-
-            <h2
-              className="font-serif text-title lg:text-5xl"
-              style={{ color: 'var(--fg-primary)' }}
-            >
-              Speak to us.
+            <h2 className="text-title font-serif">
+              Let's talk about your next launch.
             </h2>
-
-            <p
-              className="text-body-lg max-w-md"
-              style={{ color: 'var(--fg-secondary)' }}
-            >
-              If you want to start a project, share an idea or simply say hi, we want to hear from you.
+            <p className="text-body-lg" style={{ color: 'var(--fg-secondary)' }}>
+              Share your idea, goals, and timeline. We reply within 24-48 hours.
             </p>
+            <div className="space-y-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
+              <p>Email: hello@gissoler.studio</p>
+              <p>Location: Remote worldwide</p>
+            </div>
           </div>
 
-          {/* Right Column - Form */}
-          <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Name Row */}
+          <form onSubmit={handleSubmit} className="lg:col-span-7 space-y-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="label">First name</label>
                 <input
                   type="text"
                   className="input"
-                  placeholder="John"
+                  placeholder="Maria"
                   value={formData.firstName}
                   onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                   required
@@ -66,7 +56,7 @@ export function Contact() {
                 <input
                   type="text"
                   className="input"
-                  placeholder="Doe"
+                  placeholder="Lopez"
                   value={formData.lastName}
                   onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                   required
@@ -74,38 +64,47 @@ export function Contact() {
               </div>
             </div>
 
-            {/* Contact Row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="label">Email Address</label>
+                <label className="label">Email</label>
                 <input
                   type="email"
                   className="input"
-                  placeholder="john@example.com"
+                  placeholder="maria@company.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
                 />
               </div>
               <div className="space-y-2">
-                <label className="label">Phone number</label>
+                <label className="label">Company</label>
                 <input
-                  type="tel"
+                  type="text"
                   className="input"
-                  placeholder="+1 234 567 890"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  placeholder="North Studio"
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 />
               </div>
             </div>
 
-            {/* Message */}
+            <div className="space-y-2">
+              <label className="label">Budget</label>
+              <input
+                type="text"
+                className="input"
+                placeholder="USD 2k - 5k"
+                value={formData.budget}
+                onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+              />
+            </div>
+
             <div className="space-y-2">
               <label className="label">Project details</label>
               <textarea
                 className="input resize-none"
                 rows={4}
-                placeholder="Tell us about your project..."
+                placeholder="Share the essentials to get started..."
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 required
@@ -113,14 +112,8 @@ export function Contact() {
               />
             </div>
 
-            {/* Submit */}
-            <Button
-              type="submit"
-              variant="primary"
-              size="lg"
-              icon={<Icon name="arrow" size={18} />}
-            >
-              Send Enquiry
+            <Button type="submit" variant="primary" size="lg" icon={<Icon name="arrow" size={18} />}>
+              Send inquiry
             </Button>
           </form>
         </div>
