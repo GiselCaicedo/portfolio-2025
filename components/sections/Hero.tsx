@@ -5,13 +5,11 @@ import { siteConfig } from '@/data/site';
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-hero overflow-hidden">
+    <section className="relative min-h-screen flex items-center  overflow-hidden">
       {/* Background Gradient Overlay */}
       <div
         className="absolute inset-0 opacity-40"
-        style={{
-          background: 'radial-gradient(ellipse at 30% 20%, rgba(74, 101, 114, 0.3) 0%, transparent 50%)',
-        }}
+      
       />
 
       <div className="container-main relative z-10 pt-32 pb-20">

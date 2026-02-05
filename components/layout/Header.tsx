@@ -7,11 +7,17 @@ import { siteConfig } from '@/data/site';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isInHero, setIsInHero] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 12);
+      const scrollY = window.scrollY;
+      const heroHeight = window.innerHeight * 3;
+      const progress = Math.min(scrollY / (heroHeight - window.innerHeight), 1);
+
+      setScrollProgress(progress);
+      setIsInHero(scrollY < heroHeight - 50);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -19,49 +25,66 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Colors based on scroll position
   const textColor = '#ffffff';
-  const bgColor = isScrolled ? 'rgba(0, 0, 0, 0.6)' : 'transparent';
-  const borderColor = 'transparent';
+  const bgColor = 'transparent';
+
+  const clients = siteConfig.clients || [];
+  const tickerItems = [...clients, ...clients, ...clients];
+
+  // Split navigation for centered logo layout
+  const leftNav = siteConfig.navigation.slice(0, 2);
+  const rightNav = siteConfig.navigation.slice(2);
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+      className="fixed left-0 right-0 z-50 transition-all duration-500"
       style={{
+        top: 0,
         background: bgColor,
-        backdropFilter: isScrolled ? 'blur(18px)' : 'none',
-        borderBottom: `1px solid ${borderColor}`,
+        backdropFilter: 'none',
       }}
     >
       <div
         className="absolute inset-0 -z-10 pointer-events-none"
         style={{
-          background: 'linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%)',
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0) 100%)',
         }}
       />
+      {/* Ticker Bar */}
+      <div className="relative overflow-hidden" style={{ background: '#000' }}>
+        <div className="header-marquee-track">
+          {[0, 1].map((group) => (
+            <div key={group} className="header-marquee-group">
+              <span className="header-marquee-label">
+                <span className="header-marquee-dot" />
+                Now creating
+              </span>
+              {tickerItems.map((item, index) => (
+                <span
+                  key={`${group}-${index}`}
+                  className="header-marquee-item"
+                >
+                  <span className="header-marquee-muted">{item.desc}</span>
+                  <span className="header-marquee-muted">–</span>
+                  <span className="header-marquee-strong">{item.client}</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Navigation */}
       <div className="container-main">
         <nav className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-3 text-lg font-semibold tracking-tight transition-colors duration-300"
-            style={{ color: textColor }}
-          >
-            <span
-              className="inline-flex items-center justify-center w-8 h-8 rounded-full border"
-              style={{ borderColor: textColor }}
-            >
-              {siteConfig.name.charAt(0).toUpperCase()}
-            </span>
-            <span>{siteConfig.name}</span>
-          </Link>
-
-          {/* Center Navigation */}
-          <div className="hidden md:flex items-center gap-10">
-            {siteConfig.navigation.map((item) => (
+          {/* Left Navigation */}
+          <div className="hidden md:flex items-center gap-8 flex-1">
+            {leftNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium transition-colors duration-300 hover:opacity-70"
+                className="text-sm font-medium transition-colors duration-300 hover:opacity-60"
                 style={{ color: textColor }}
               >
                 {item.label}
@@ -69,25 +92,28 @@ export function Header() {
             ))}
           </div>
 
-          {/* Right CTA */}
-          <div className="hidden md:flex items-center gap-3">
-            <span
-              className="text-xs uppercase tracking-widest px-3 py-1 rounded-full border"
-              style={{ color: textColor, borderColor: 'rgba(0,0,0,0.25)' }}
-            >
-              Booking open
-            </span>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full transition-colors"
-              style={{
-                background: '#ffffff',
-                color: '#0a0a0a',
-              }}
-            >
-              Let's talk
-              <Icon name="arrow" size={16} />
-            </a>
+          {/* Centered Logo */}
+          <Link
+            href="/"
+            className="text-xl font-semibold tracking-tight transition-colors duration-300 md:absolute md:left-1/2 md:-translate-x-1/2"
+            style={{ color: textColor }}
+          >
+            {siteConfig.name}
+            <span className="text-xs align-super ml-0.5">®</span>
+          </Link>
+
+          {/* Right Navigation */}
+          <div className="hidden md:flex items-center gap-8 flex-1 justify-end">
+            {rightNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium transition-colors duration-300 hover:opacity-60"
+                style={{ color: textColor }}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
 
           {/* Mobile Menu Button */}
@@ -134,7 +160,7 @@ export function Header() {
                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              Let's talk
+              Get in Touch
             </button>
           </div>
         </div>

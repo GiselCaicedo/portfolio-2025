@@ -10,7 +10,7 @@ export function Footer() {
   return (
     <footer
       className="relative overflow-hidden"
-      style={{ background: 'var(--fg-primary)', color: 'var(--bg-primary)' }}
+      style={{ background: 'var(--bg-primary)', color: 'var(--fg-primary)' }}
     >
       {/* Main Footer Content */}
       <div className="container-main section-spacing">

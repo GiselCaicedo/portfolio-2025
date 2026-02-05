@@ -15,15 +15,12 @@ export default function Home() {
   return (
     <>
       <HeroVisuvate />
-      <TechStack />
-      <Intro />
       <Projects />
       <Services />
       <Platforms />
       <Process />
       <Faq />
       <Contact />
-      <Cta />
     </>
   );
 }

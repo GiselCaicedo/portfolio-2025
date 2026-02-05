@@ -27,6 +27,12 @@ export const siteConfig: SiteConfig = {
     { name: 'LinkedIn', href: 'https://linkedin.com', icon: 'linkedin' },
     { name: 'Instagram', href: 'https://instagram.com', icon: 'instagram' },
   ],
+  clients: [
+    { desc: 'Brand refresh', client: 'Atlas' },
+    { desc: 'Product site', client: 'Aurora' },
+    { desc: 'Ecommerce', client: 'North' },
+    { desc: 'Marketing site', client: 'Lumora' },
+  ],
 };
 
 export const techStack: TechItem[] = [

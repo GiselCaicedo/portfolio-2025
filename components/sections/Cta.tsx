@@ -4,12 +4,12 @@ import { Button, Icon } from '@/components/ui';
 
 export function Cta() {
   return (
-    <section className="section-spacing" style={{ background: 'var(--bg-contrast)', color: 'var(--bg-primary)' }}>
+    <section className="section-spacing" style={{ background: 'var(--bg-primary)', color: 'var(--fg-primary)' }}>
       <div className="container-main">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-8 space-y-6">
-            <p className="text-caption text-white/60">Ready to build?</p>
-            <h2 className="text-display font-serif text-white">
+            <p className="text-caption text-[var(--fg-tertiary)]">Ready to build?</p>
+            <h2 className="text-display font-serif text-[var(--fg-primary)]">
               Create bold. Deliver better.
             </h2>
           </div>
